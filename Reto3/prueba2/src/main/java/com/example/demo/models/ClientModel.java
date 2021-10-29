@@ -4,6 +4,7 @@
  */
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
@@ -25,8 +26,7 @@ public class ClientModel implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    
+    private Integer Id;
     private String email;
     private String password;
     private String name;
@@ -47,11 +47,11 @@ public class ClientModel implements Serializable{
     public ClientModel() {
     }
     
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int Id) {
+    public void setId(Integer Id) {
         this.Id = Id;
     }
 

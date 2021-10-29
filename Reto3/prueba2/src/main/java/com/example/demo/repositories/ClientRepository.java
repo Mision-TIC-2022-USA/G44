@@ -24,4 +24,9 @@ public class ClientRepository {
     {
        return (List)clientCrudRepository.findAll();
     }
+    
+    public ClientModel save(ClientModel clientModel)
+    {
+       return clientCrudRepository.save(clientModel);
+    }
 }

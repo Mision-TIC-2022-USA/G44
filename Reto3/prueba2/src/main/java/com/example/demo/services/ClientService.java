@@ -20,8 +20,16 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
     
-    public List<ClientModel> getAll()
-    {
-      return clientRepository.getAll();
+    public List<ClientModel> getAll() {
+        return clientRepository.getAll();
     }
+    
+    public ClientModel save(ClientModel clientModel) {
+        
+        if (clientModel.getId() == null)
+            return clientRepository.save(clientModel);
+                
+        return clientModel;
+    }
+       
 }
