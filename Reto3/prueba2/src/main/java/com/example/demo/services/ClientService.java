@@ -7,6 +7,7 @@ package com.example.demo.services;
 import com.example.demo.models.ClientModel;
 import com.example.demo.repositories.ClientRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,13 @@ public class ClientService {
         
         if (clientModel.getId() == null)
             return clientRepository.save(clientModel);
-                
-        return clientModel;
+        
+        Optional<ClientModel> clientdb = clientRepository.getClientById(clientModel.getId());
+        
+        if(clientdb.isEmpty())
+            return clientRepository.save(clientModel);
+        
+        return null;
     }
        
 }

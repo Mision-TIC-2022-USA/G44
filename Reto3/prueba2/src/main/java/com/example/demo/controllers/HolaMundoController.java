@@ -4,7 +4,6 @@
  */
 package com.example.demo.controllers;
 
-
 import com.example.demo.models.ClientModel;
 import com.example.demo.services.ClientService;
 import java.util.List;
@@ -27,21 +26,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/Client")
 public class HolaMundoController {
-    
+
     @Autowired
-    private ClientService clientService; 
-    
+    private ClientService clientService;
+
     @GetMapping("/all")
-    public List<ClientModel> getAll()
-    {
-        return clientService.getAll();       
+    public List<ClientModel> getAll() {
+        return clientService.getAll();
     }
-    
+
     @PostMapping("/save")
-    public ResponseEntity<ClientModel> save(@RequestBody ClientModel clientModel)
-    {
+    public ResponseEntity<ClientModel> save(@RequestBody ClientModel clientModel) {
         ClientModel clientModelresponse = clientService.save(clientModel);
-        ResponseEntity<ClientModel> entity = new ResponseEntity(clientModelresponse,HttpStatus.CREATED);
-        return entity;
+
+        if (clientModelresponse == null) {
+            return new ResponseEntity(clientModelresponse, HttpStatus.CONFLICT);
+        }
+
+        return new ResponseEntity(clientModelresponse, HttpStatus.CREATED);
     }
- }
+
+}

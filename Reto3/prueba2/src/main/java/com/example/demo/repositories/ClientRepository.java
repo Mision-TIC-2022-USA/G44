@@ -6,6 +6,7 @@ package com.example.demo.repositories;
 
 import com.example.demo.models.ClientModel;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,5 +29,10 @@ public class ClientRepository {
     public ClientModel save(ClientModel clientModel)
     {
        return clientCrudRepository.save(clientModel);
+    }
+    
+    public Optional<ClientModel> getClientById(int id)
+    {
+       return clientCrudRepository.findById(id);
     }
 }
