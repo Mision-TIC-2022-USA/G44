@@ -45,5 +45,4 @@ public class HolaMundoController {
 
         return new ResponseEntity(clientModelresponse, HttpStatus.CREATED);
     }
-
 }
