@@ -40,9 +40,7 @@ public class HolaMundoController {
     public ResponseEntity<ClientModel> save(@RequestBody ClientModel clientModel) {
         ClientModel clientModelresponse = clientService.save(clientModel);
 
-        if (clientModelresponse == null) {
-            return new ResponseEntity(clientModelresponse, HttpStatus.CONFLICT);
-        }
+        HttpStatus status = (clientModelresponse == null ? HttpStatus.CONFLICT : HttpStatus.OK);
 
         return new ResponseEntity(clientModelresponse, HttpStatus.CREATED);
     }
@@ -52,10 +50,9 @@ public class HolaMundoController {
 
         ClientModel result = clientService.getClientById(id);
 
-        if (result == null) 
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        HttpStatus status = (result == null ? HttpStatus.NO_CONTENT : HttpStatus.OK);
         
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, status);
     }
 
     //@PutMapping
