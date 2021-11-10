@@ -17,25 +17,37 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClientService {
-    
+
     @Autowired
     private ClientRepository clientRepository;
-    
+
     public List<ClientModel> getAll() {
         return clientRepository.getAll();
     }
-    
+
     public ClientModel save(ClientModel clientModel) {
-        
-        if (clientModel.getId() == null)
+
+        if (clientModel.getId() == null) {
             return clientRepository.save(clientModel);
-        
+        }
+
         Optional<ClientModel> clientdb = clientRepository.getClientById(clientModel.getId());
-        
-        if(clientdb.isEmpty())
+
+        if (clientdb.isEmpty()) {
             return clientRepository.save(clientModel);
-        
+        }
+
         return null;
     }
-       
+
+    public ClientModel getClientById(Integer id) {
+        Optional<ClientModel> result = clientRepository.getClientById(id);
+
+        if (result.isEmpty()) {
+            return null;
+        }
+
+        return result.get();
+    }
+
 }
